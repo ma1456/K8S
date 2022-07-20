@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: openmrs
   labels:
-    app: mysql
+    app: openmrs
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: mysql
+      app: openmrs
   template:
     metadata:
       labels:
-        app: mysql
+        app: openmrs
     spec: 
       containers:
         - image: mysql:8.0
