@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: openmrs-rs
+  labels:
+    app: openmrs-core
+    version: dev
+spec:
+  minReadySeconds: 10
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: database
+        operator: NotIn
+        values:
+          - openmrs
+          - openmrs
+  template:
+    metadata:
+      labels:
+        app: openmrs-core
+        version: dev
+    spec:
+      containers:
+        - name: openmrs-core
+          image: openmrs/openmrs-core:dev
+          ports:
+            - containerPort: 3306
+
